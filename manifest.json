@@ -1,10 +1,11 @@
 {
-  "name": "Ragnarok Stat Calculator",
-  "short_name": "RO Stat Calc",
-  "start_url": "./index.html",
+  "name": "RO Stat Calculator",
+  "short_name": "RO Stats",
+  "description": "Calculator for RO stats",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#6495ed",
+  "theme_color": "#0078d7",
   "icons": [
     {
       "src": "icon.png",
