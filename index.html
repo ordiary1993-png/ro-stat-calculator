@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ragnarok Online Stat Calculator</title>
+    <title>Ragnarok Online Stat Calculator · refined</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -23,15 +23,18 @@
             border-bottom: 2px solid #f28500;
             padding-bottom: 10px;
         }
+
+        /* --- REPLACED .stat-grid BLOCK (exactly as requested) --- */
         .stat-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
             margin: 20px 0;
             background: #f8f9fa;
             padding: 20px;
             border-radius: 8px;
         }
+
         .stat-input {
             display: flex;
             flex-direction: column;
@@ -130,12 +133,21 @@
             font-weight: bold;
             margin: 10px 0;
         }
+
+        /* --- NEW RESPONSIVE RULES (exactly as requested) --- */
+        @media (max-width: 600px) {
+            body { margin: 15px; }
+            h1 { font-size: 22px; }
+            .controls { flex-direction: column; }
+            button { width: 100%; }
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>Ragnarok Online Stat Calculator</h1>
 
+    <!-- stat grid uses the updated auto-fit / minmax(120px) style -->
     <div class="stat-grid">
         <div class="stat-input">
             <label>STR</label>
