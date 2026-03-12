@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ragnarok Online Stat Calculator</title>
-    <link rel="manifest" href="manifest.json">
-
-    <!-- AdSense / AdMob script -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1053943353456930"
-        crossorigin="anonymous"></script>
+    <title>Ragnarok Online Stat Calculator · refined</title>
+    
+    <!-- AdMob/AdSense script -->
+    <script async 
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXX"
+      crossorigin="anonymous">
+    </script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
     
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 30px;
             background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         .container {
             max-width: 1000px;
@@ -23,12 +30,16 @@
             padding: 25px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            flex: 1 0 auto;
+            width: 100%;
+            box-sizing: border-box;
         }
         h1 {
             color: #333;
             border-bottom: 2px solid #f28500;
             padding-bottom: 10px;
         }
+
         .stat-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -38,144 +49,216 @@
             padding: 20px;
             border-radius: 8px;
         }
-        .stat-input { display: flex; flex-direction: column; gap: 5px; }
-        .stat-input label { font-weight: 600; color: #6495ed; font-size: 0.9rem; }
-        .stat-input input {
-            padding: 10px; border: 2px solid #ddd; border-radius: 6px;
-            font-size: 1rem; width: 100%; box-sizing: border-box;
-            background: white; transition: none;
+
+        .stat-input {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
-        .stat-input input:focus { border-color: #6495ed; outline: none; }
-        .stat-input input::placeholder { color: #aaa; font-style: italic; }
+        .stat-input label {
+            font-weight: 600;
+            color: #6495ed;
+            font-size: 0.9rem;
+        }
+        .stat-input input {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+            background: white;
+            transition: none;
+        }
+        .stat-input input:focus {
+            border-color: #6495ed;
+            outline: none;
+        }
+        .stat-input input::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
         .controls {
-            display: flex; gap: 20px; flex-wrap: wrap; margin: 25px 0;
-            background: #f8f9fa; padding: 20px; border-radius: 8px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
             align-items: flex-end;
         }
-        .control-group { display: flex; flex-direction: column; gap: 8px; min-width: 280px; }
-        .control-group label { font-weight: 600; color: #6495ed; font-size: 0.9rem; }
-        select, button { padding: 10px 15px; border: 2px solid #ddd; border-radius: 6px; font-size: 1rem; box-sizing: border-box; height: 42px; }
-        select { width: 100%; } select:focus { border-color: #6495ed; outline: none; }
-        button { background: #c6d7f0; color: #333; font-weight: bold; border: 2px solid #ddd; cursor: pointer; min-width: 120px; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-top: 20px; }
-        .stat-item { background: #f8f9fa; padding: 10px 15px; border-radius: 6px; font-family: monospace; font-size: 1rem; border-left: 4px solid #6495ed; border: 1px solid #ddd; border-left-width: 4px; }
-        .summary { margin-top: 20px; font-weight: bold; color: #6495ed; }
-        .error { color: #c00; font-weight: bold; margin: 10px 0; }
-        @media (max-width: 600px) { body { margin: 15px; } h1 { font-size: 22px; } .controls { flex-direction: column; } button { width: 100%; } }
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 280px;
+        }
+        .control-group label {
+            font-weight: 600;
+            color: #6495ed;
+            font-size: 0.9rem;
+        }
+        select, button {
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            height: 42px;
+        }
+        select {
+            width: 100%;
+        }
+        select:focus {
+            border-color: #6495ed;
+            outline: none;
+        }
+        button {
+            background: #c6d7f0;
+            color: #333;
+            font-weight: bold;
+            border: 2px solid #ddd;
+            cursor: pointer;
+            min-width: 120px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .stat-item {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 1rem;
+            border-left: 4px solid #6495ed;
+            border: 1px solid #ddd;
+            border-left-width: 4px;
+        }
+        .summary {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #6495ed;
+        }
+        .error {
+            color: #c00;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        /* Banner ad styles */
+        .ad-container {
+            max-width: 1000px;
+            margin: 20px auto 0;
+            padding: 0 25px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .ad-banner {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+            min-height: 90px; /* Typical banner height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ad-label {
+            color: #999;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        
+        .ad-content {
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        /* Responsive ad sizing */
+        .ad-banner ins {
+            display: block;
+            width: 100%;
+        }
+
+        @media (max-width: 600px) {
+            body { margin: 15px; }
+            h1 { font-size: 22px; }
+            .controls { flex-direction: column; }
+            button { width: 100%; }
+            .ad-container { padding: 0 15px; }
+        }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>Ragnarok Online Stat Calculator</h1>
+    <div class="container">
+        <h1>Ragnarok Online Stat Calculator</h1>
 
-    <div class="stat-grid">
-        <div class="stat-input"><label>STR</label><input type="number" id="str" min="1" max="99" placeholder="Empty for Auto" autocomplete="off"></div>
-        <div class="stat-input"><label>AGI</label><input type="number" id="agi" min="1" max="99" placeholder="Empty for Auto" autocomplete="off"></div>
-        <div class="stat-input"><label>VIT</label><input type="number" id="vit" min="1" max="99" placeholder="Empty for Auto" autocomplete="off"></div>
-        <div class="stat-input"><label>INT</label><input type="number" id="int" min="1" max="99" placeholder="Empty for Auto" autocomplete="off"></div>
-        <div class="stat-input"><label>DEX</label><input type="number" id="dex" min="1" max="99" placeholder="Empty for Auto" autocomplete="off"></div>
-        <div class="stat-input"><label>LUK</label><input type="number" id="luk" min="1" max="99" placeholder="Empty for Auto" autocomplete="off"></div>
-    </div>
-
-    <div class="controls">
-        <div class="control-group">
-            <label>Status Point</label>
-            <select id="totalPoints">
-                <option value="1273" selected>Level 99 (1273 Status Point) Classic</option>
-                <option value="1325">Level 99 (1325 Status Point) Transcendent</option>
-            </select>
+        <div class="stat-grid">
+            <div class="stat-input">
+                <label>STR</label>
+                <input type="number" id="str" min="1" max="99" placeholder="Empty for Auto" autocomplete="off">
+            </div>
+            <div class="stat-input">
+                <label>AGI</label>
+                <input type="number" id="agi" min="1" max="99" placeholder="Empty for Auto" autocomplete="off">
+            </div>
+            <div class="stat-input">
+                <label>VIT</label>
+                <input type="number" id="vit" min="1" max="99" placeholder="Empty for Auto" autocomplete="off">
+            </div>
+            <div class="stat-input">
+                <label>INT</label>
+                <input type="number" id="int" min="1" max="99" placeholder="Empty for Auto" autocomplete="off">
+            </div>
+            <div class="stat-input">
+                <label>DEX</label>
+                <input type="number" id="dex" min="1" max="99" placeholder="Empty for Auto" autocomplete="off">
+            </div>
+            <div class="stat-input">
+                <label>LUK</label>
+                <input type="number" id="luk" min="1" max="99" placeholder="Empty for Auto" autocomplete="off">
+            </div>
         </div>
-        <button id="generateBtn">Generate</button>
+
+        <div class="controls">
+            <div class="control-group">
+                <label>Status Point</label>
+                <select id="totalPoints">
+                    <option value="1273" selected>Level 99 (1273 Status Point) Classic</option>
+                    <option value="1325">Level 99 (1325 Status Point) Transcendent</option>
+                </select>
+            </div>
+            <button id="generateBtn">Generate</button>
+        </div>
+
+        <div id="results">
+            <div class="summary" id="summary"></div>
+            <div id="errorMsg" class="error"></div>
+            <div id="combinations" class="stats-grid"></div>
+        </div>
     </div>
 
-    <div id="results">
-        <div class="summary" id="summary"></div>
-        <div id="errorMsg" class="error"></div>
-        <div id="combinations" class="stats-grid"></div>
+    <!-- Banner Ad Container (Bottom) -->
+    <div class="ad-container">
+        <div class="ad-label">Advertisement</div>
+        <div class="ad-banner">
+            <!-- AdSense Banner Ad -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXX"
+                 data-ad-slot="YYYYYYYYYY"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
     </div>
-</div>
-
-<!-- ✅ Test Banner Ad at Bottom -->
-<div style="text-align:center; margin-top:20px;">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-1053943353456930"
-       data-ad-slot="1234567890"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-</div>
-
-<script>
-(function() {
-    const costMap = new Map();
-    for (let stat = 1, cost = 0; stat <= 99; stat++) {
-        if (stat > 1) {
-            let inc = (stat<=11?2:stat<=21?3:stat<=31?4:stat<=41?5:stat<=51?6:stat<=61?7:stat<=71?8:stat<=81?9:stat<=91?10:11);
-            cost += inc;
-        }
-        costMap.set(stat, cost);
-    }
-    const reverseCost = new Map();
-    for (let [stat,c] of costMap) reverseCost.set(c, stat);
-    const validCosts = Array.from(reverseCost.keys()).sort((a,b)=>a-b);
-    const statNames = ['STR','AGI','VIT','INT','DEX','LUK'];
-
-    function generateCombinations(fixedStats,totalPoints) {
-        const fixedCosts=[], fixedIndices=[], results=[], flexCostCombos=[], fixedTotalCost=0;
-        let totalFixed=0;
-        let remaining=totalPoints;
-        let flexCount=0;
-        for(let i=0;i<6;i++){ if(fixedStats[i]!==null){ totalFixed+=costMap.get(fixedStats[i]); } }
-        remaining-=totalFixed; flexCount=fixedStats.filter(v=>v===null).length;
-
-        function findCombos(start,combo,sum,depth,maxDepth){
-            if(depth===maxDepth){ if(sum===remaining) flexCostCombos.push([...combo]); return; }
-            for(let i=start;i<validCosts.length;i++){ 
-                let cost=validCosts[i];
-                if(sum+cost>remaining) break;
-                combo.push(cost); findCombos(i,combo,sum+cost,depth+1,maxDepth); combo.pop();
-            }
-        }
-        findCombos(0,[],0,0,flexCount);
-
-        flexCostCombos.forEach(costCombo=>{
-            const flexStats=costCombo.map(c=>reverseCost.get(c)).sort((a,b)=>a-b);
-            const result=new Array(6); let flexIdx=0;
-            for(let i=0;i<6;i++){ result[i]=fixedStats[i]!==null?fixedStats[i]:flexStats[flexIdx++]; }
-            const key=result.join(',');
-            if(!results.some(r=>r.join(',')===key)) results.push(result);
-        });
-        return results;
-    }
-
-    function displayResults(combos){
-        const container=document.getElementById('combinations');
-        const summary=document.getElementById('summary');
-        const errorMsg=document.getElementById('errorMsg');
-        container.innerHTML=''; errorMsg.innerText='';
-        if(combos.length===0){ summary.innerText='No valid combinations found.'; return; }
-        summary.innerText=`Found ${combos.length} combination${combos.length>1?'s':''}:`;
-        combos.forEach(combo=>{
-            const div=document.createElement('div');
-            div.className='stat-item';
-            div.innerText=statNames.map((n,i)=>`${n} ${combo[i]}`).join(' · ');
-            container.appendChild(div);
-        });
-    }
-
-    document.getElementById('generateBtn').addEventListener('click',()=>{
-        const vals=['str','agi','vit','int','dex','luk'].map(id=>{
-            const v=document.getElementById(id).value; return v===''?null:parseInt(v,10);
-        });
-        const totalPoints=parseInt(document.getElementById('totalPoints').value,10);
-        displayResults(generateCombinations(vals,totalPoints));
-    });
-
-    window.onload=function(){ ['str','agi','vit','int','dex','luk'].forEach(id=>document.getElementById(id).value=''); };
-})();
-</script>
-</body>
-</html>
